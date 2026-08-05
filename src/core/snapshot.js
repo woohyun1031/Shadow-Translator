@@ -6,7 +6,7 @@ const snapshots = new WeakMap();
 // 블록 -> 마지막으로 렌더할 때 사용한 번역문 (중복 렌더 방지용)
 let lastRendered = new WeakMap();
 
-const blockSelector = Array.from(structuralTags)
+const blockSelector = Array.from(structuralTags) //  // "p,div,h1,h2,…,li,td,…"
     .map((tag) => tag.toLowerCase())
     .join(',');
 

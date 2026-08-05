@@ -55,22 +55,18 @@ const queueBlock = (node) => {
 };
 
 /**
- * 삽입된 노드에서 font를 찾아 그 블록을 렌더 대기열에 넣는다.
- * font를 하나도 찾지 못하면 false를 돌려준다(= 번역과 무관한 삽입).
+ * 삽입된 노드에서 font들의 부모를 찾는다.
+ * 하나도 찾지 못하면 null을 돌려준다(= 번역과 무관한 삽입).
  */
-const queueFontBlocks = (node, parent) => {
-    if (node.tagName === 'FONT') {
-        queueBlock(parent);
-        return true;
-    }
+const findFontParents = (node, parent) => {
+    if (node.tagName === 'FONT') return [parent];
 
-    if (!node.querySelectorAll) return false;
+    if (!node.querySelectorAll) return null;
 
     const fonts = node.querySelectorAll('font');
-    if (fonts.length === 0) return false;
+    if (fonts.length === 0) return null;
 
-    fonts.forEach((font) => queueBlock(font.parentNode));
-    return true;
+    return Array.from(fonts, (font) => font.parentNode);
 };
 
 const scheduleShadowCleanup = (parent) => {
@@ -93,8 +89,14 @@ const observer = new MutationObserver((mutations) => {
         mutation.addedNodes.forEach((node) => {
             if (node.nodeType !== Node.ELEMENT_NODE) return;
 
-            if (queueFontBlocks(node, mutation.target)) {
-                hasFontChanges = true;
+            const fontParents = findFontParents(node, mutation.target);
+            if (fontParents) {
+                // 꺼져 있으면 대기열에 쌓지 않는다.
+                // 다시 켤 때 renderExistingTranslations가 font를 전수 스캔해 복구한다.
+                if (isEnabled) {
+                    fontParents.forEach(queueBlock);
+                    hasFontChanges = true;
+                }
                 return;
             }
 
@@ -110,7 +112,8 @@ const observer = new MutationObserver((mutations) => {
         });
     });
 
-    if (hasFontChanges && isEnabled) scheduleRender();
+    // hasFontChanges는 isEnabled일 때만 켜진다
+    if (hasFontChanges) scheduleRender();
 });
 
 const htmlObserver = new MutationObserver(() => {
