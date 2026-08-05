@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Shadow Translator - 이중 언어 번역",
-    "version": "1.1.3",
+    "version": "1.2.0",
     "description": "구글 번역 결과 아래에 원문을 회색 그림자로 함께 표시 — 원문과 번역을 동시에 보려는 학습자에게 안성맞춤",
     "permissions": ["storage"],
     "action": {
