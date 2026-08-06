@@ -1,6 +1,7 @@
 import { startObserver, setEnabled } from './core/observer';
 import { captureAll } from './core/snapshot';
 import { setShadowStyle } from './core/renderer';
+import type { ShadowStyle } from './core/defaults';
 
 (function () {
     console.log('Shadow-Translator: Modular entry point initialized.');
@@ -19,17 +20,17 @@ import { setShadowStyle } from './core/renderer';
         if (typeof chrome === 'undefined' || !chrome.storage) return;
 
         chrome.storage.local.get(['isEnabled', 'shadowStyle'], (result) => {
-            setShadowStyle(result.shadowStyle);
+            setShadowStyle(result.shadowStyle as Partial<ShadowStyle> | undefined);
             setEnabled(result.isEnabled !== false);
         });
 
         chrome.storage.onChanged.addListener((changes, namespace) => {
             if (namespace !== 'local') return;
             if (changes.isEnabled !== undefined) {
-                setEnabled(changes.isEnabled.newValue);
+                setEnabled(changes.isEnabled.newValue as boolean);
             }
             if (changes.shadowStyle !== undefined) {
-                setShadowStyle(changes.shadowStyle.newValue);
+                setShadowStyle(changes.shadowStyle.newValue as Partial<ShadowStyle> | undefined);
             }
         });
     };

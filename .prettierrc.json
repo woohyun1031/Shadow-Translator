@@ -19,6 +19,12 @@
             "options": {
                 "parser": "babel"
             }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "options": {
+                "parser": "typescript"
+            }
         }
     ]
 }
