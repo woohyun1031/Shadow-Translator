@@ -8,6 +8,8 @@
 npm run build         # webpack production → dist/ (ts-loader가 타입 체크까지 수행)
 npm run watch         # 개발용 watch
 npm run typecheck     # tsc --noEmit, 빌드 없이 타입만 검증
+npm test              # vitest run (jsdom)
+npm run test:watch    # vitest watch
 npm run format        # prettier 일괄 적용
 npm run format:check  # 포맷 검증
 ```
@@ -78,4 +80,6 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 ## 빌드/배포
 
 - [dist/](dist/)는 [.gitignore](.gitignore)됨. 배포는 `npm run build` 후 `dist/`를 zip으로 압축해 크롬 웹스토어에 업로드.
-- 테스트 스크립트는 placeholder ([package.json](package.json)의 `test`) — 별도 테스트 프레임워크는 없다.
+- 테스트는 **Vitest + jsdom** ([vitest.config.mts](vitest.config.mts)). 테스트 파일은 소스 옆에 `src/**/*.test.ts`로 둔다. 아직 작성된 테스트는 없고 `passWithNoTests`로 통과 처리 중이므로, 첫 테스트를 추가할 때 그 옵션을 지운다.
+- 설정 파일이 `.mts`인 이유 — [webpack.config.js](webpack.config.js)가 CommonJS라 [package.json](package.json)에 `"type": "module"`을 넣을 수 없다. `.ts`로 두면 Vite가 CommonJS로 로드해 경고가 난다.
+- `npm run typecheck`는 `src/**/*.ts`를 보므로 테스트 파일도 타입 검사 대상이다. 반면 `npm run build`는 entry에서 도달 가능한 모듈만 처리하므로 테스트는 번들에 들어가지 않는다.
