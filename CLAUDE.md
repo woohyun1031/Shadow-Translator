@@ -69,7 +69,7 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 - **자기 재번역 차단** — shadow div는 `class="... notranslate"` + `translate="no"`로 차단한다. 새 shadow 요소를 추가할 때 같은 속성을 반드시 붙인다.
 - **스타일은 storage `shadowStyle` 키** ([src/core/defaults.ts](src/core/defaults.ts)) — 기본값과 슬라이더 범위가 여기 있다. 항목을 늘리려면 defaults + popup + `applyStyleToNode` 3곳을 함께 고친다.
 - **TypeScript는 6.x에 고정** — TS 7은 Go 네이티브 포트라 `ts-loader` 9.x가 동작하지 않는다(`findConfigFile`에서 `Cannot read properties of undefined (reading 'fileExists')`). [package.json](package.json)의 `typescript: ^6.0.3`을 7로 올리지 말 것.
-- **타입 에러는 캐스팅으로만 해결한다** — `?.`나 `|| ''` 같은 런타임 분기를 추가하면 동작이 조용히 바뀐다. 예를 들어 [src/popup.ts](src/popup.ts)의 `el.dataset.color!`를 `el.dataset.color?.`로 바꾸면 swatch의 `active` 판정이 실패해도 아무 에러 없이 넘어간다. 테스트가 없으므로 이런 변경은 잡히지 않는다.
+- **타입 에러는 캐스팅으로만 해결한다** — `?.`나 `|| ''` 같은 런타임 분기를 추가하면 동작이 조용히 바뀐다. 예를 들어 [src/popup.ts](src/popup.ts)의 `el.dataset.color!`를 `el.dataset.color?.`로 바꾸면 swatch의 `active` 판정이 실패해도 아무 에러 없이 넘어간다. popup에는 테스트가 없으므로 이런 변경은 잡히지 않는다.
 
 ## 자주 하는 작업
 
@@ -80,6 +80,7 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 ## 빌드/배포
 
 - [dist/](dist/)는 [.gitignore](.gitignore)됨. 배포는 `npm run build` 후 `dist/`를 zip으로 압축해 크롬 웹스토어에 업로드.
-- 테스트는 **Vitest + jsdom** ([vitest.config.mts](vitest.config.mts)). 테스트 파일은 소스 옆에 `src/**/*.test.ts`로 둔다. 아직 작성된 테스트는 없고 `passWithNoTests`로 통과 처리 중이므로, 첫 테스트를 추가할 때 그 옵션을 지운다.
+- 테스트는 **Vitest + jsdom** ([vitest.config.mts](vitest.config.mts)). 테스트 파일은 소스 옆에 `src/**/*.test.ts`로 둔다. `core/`와 `utils/`는 테스트가 있고, `popup.ts`와 `content.ts`(부트스트랩)는 아직 없다.
+- [src/core/observer.test.ts](src/core/observer.test.ts)는 모듈 레벨 상태 때문에 테스트마다 `vi.resetModules()` 후 다시 import하고, 이전 observer를 끊을 수 없어서 `body`를 통째로 교체한다. 번역은 shadow(notranslate)를 남긴 채 나머지 자식을 `<font>`로 바꾸는 방식으로 흉내 낸다. 디바운스·유예 시간은 fake timer(`advanceTimersByTimeAsync`)로 진행한다.
 - 설정 파일이 `.mts`인 이유 — [webpack.config.js](webpack.config.js)가 CommonJS라 [package.json](package.json)에 `"type": "module"`을 넣을 수 없다. `.ts`로 두면 Vite가 CommonJS로 로드해 경고가 난다.
 - `npm run typecheck`는 `src/**/*.ts`를 보므로 테스트 파일도 타입 검사 대상이다. 반면 `npm run build`는 entry에서 도달 가능한 모듈만 처리하므로 테스트는 번들에 들어가지 않는다.
