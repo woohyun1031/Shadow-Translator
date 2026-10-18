@@ -1,9 +1,9 @@
 import { structuralTags } from '../utils/dom';
-import { DEFAULT_SHADOW_STYLE } from './defaults';
+import { DEFAULT_SHADOW_STYLE, ShadowStyle } from './defaults';
 
-let currentStyle = { ...DEFAULT_SHADOW_STYLE };
+let currentStyle: ShadowStyle = { ...DEFAULT_SHADOW_STYLE };
 
-function applyStyleToNode(el, s) {
+function applyStyleToNode(el: HTMLElement, s: ShadowStyle): void {
     el.style.color = s.color;
     el.style.fontSize = `${s.fontSize}em`;
     el.style.marginTop = `${s.marginTop}px`;
@@ -13,27 +13,31 @@ function applyStyleToNode(el, s) {
     el.style.opacity = String(s.opacity);
 }
 
-export function setShadowStyle(partial) {
+export function setShadowStyle(partial?: Partial<ShadowStyle> | null): void {
     currentStyle = { ...DEFAULT_SHADOW_STYLE, ...(partial || {}) };
     document
-        .querySelectorAll('.echo-original-text')
+        .querySelectorAll<HTMLElement>('.echo-original-text')
         .forEach((el) => applyStyleToNode(el, currentStyle));
 }
 
 // 비교용 정규화: 모든 공백 제거 (번역기가 기호 주변 공백을 임의로 가감하므로)
-const normalizeForCompare = (s) => s.replace(/\s+/g, '');
+const normalizeForCompare = (s: string): string => s.replace(/\s+/g, '');
 
-export function renderShadowText(block, text, translated) {
+export function renderShadowText(
+    block: HTMLElement,
+    text: string | null,
+    translated?: string | null
+): void {
     if (!text) return;
 
     // 직계 자식 중에서 이미 렌더링된 원본 텍스트 컨테이너가 있는지 확인
-    let grayTextDiv = null;
+    let grayTextDiv: HTMLElement | null = null;
     for (let child of block.childNodes) {
         if (
             child.nodeType === Node.ELEMENT_NODE &&
-            child.classList.contains('echo-original-text')
+            (child as Element).classList.contains('echo-original-text')
         ) {
-            grayTextDiv = child;
+            grayTextDiv = child as HTMLElement;
             break;
         }
     }
@@ -59,11 +63,11 @@ export function renderShadowText(block, text, translated) {
         applyStyleToNode(grayTextDiv, currentStyle);
 
         // 가장 가까운 다음 블록 요소(예: <p>)를 찾아 그 앞에 삽입하여, 번역문 바로 아래 위치하도록 보장
-        let insertBeforeNode = null;
+        let insertBeforeNode: ChildNode | null = null;
         for (let child of block.childNodes) {
             if (
                 child.nodeType === Node.ELEMENT_NODE &&
-                structuralTags.has(child.tagName.toUpperCase())
+                structuralTags.has((child as Element).tagName.toUpperCase())
             ) {
                 insertBeforeNode = child;
                 break;
@@ -80,6 +84,6 @@ export function renderShadowText(block, text, translated) {
     grayTextDiv.textContent = cleanText;
 }
 
-export function clearShadowTexts(container = document) {
+export function clearShadowTexts(container: Document | Element = document): void {
     container.querySelectorAll('.echo-original-text').forEach((el) => el.remove());
 }

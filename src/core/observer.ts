@@ -16,14 +16,14 @@ const RENDER_DEBOUNCE_MS = 300;
 // font 제거가 "번역 해제"인지 "재번역 중 교체"인지 구분하기 위한 대기 시간
 const FONT_REMOVAL_GRACE_MS = 50;
 
-const pendingBlocks = new Set();
+const pendingBlocks = new Set<HTMLElement>();
 
-let renderTimeout = null;
+let renderTimeout: ReturnType<typeof setTimeout> | null = null;
 let isObserverRunning = false;
 let isEnabled = true;
 let wasPageTranslated = false;
 
-const flush = () => {
+const flush = (): void => {
     pendingBlocks.forEach((block) => {
         if (!block.isConnected) return;
 
@@ -44,12 +44,12 @@ const flush = () => {
     pendingBlocks.clear();
 };
 
-const scheduleRender = () => {
+const scheduleRender = (): void => {
     if (renderTimeout) clearTimeout(renderTimeout);
     renderTimeout = setTimeout(flush, RENDER_DEBOUNCE_MS);
 };
 
-const queueBlock = (node) => {
+const queueBlock = (node: Node | null): void => {
     const block = getBlockContainer(node);
     if (block) pendingBlocks.add(block);
 };
@@ -58,18 +58,18 @@ const queueBlock = (node) => {
  * 삽입된 노드에서 font들의 부모를 찾는다.
  * 하나도 찾지 못하면 null을 돌려준다(= 번역과 무관한 삽입).
  */
-const findFontParents = (node, parent) => {
-    if (node.tagName === 'FONT') return [parent];
+const findFontParents = (node: Node, parent: Node): (Node | null)[] | null => {
+    if ((node as Element).tagName === 'FONT') return [parent];
 
-    if (!node.querySelectorAll) return null;
+    if (!(node as Partial<Element>).querySelectorAll) return null;
 
-    const fonts = node.querySelectorAll('font');
+    const fonts = (node as Element).querySelectorAll('font');
     if (fonts.length === 0) return null;
 
     return Array.from(fonts, (font) => font.parentNode);
 };
 
-const scheduleShadowCleanup = (parent) => {
+const scheduleShadowCleanup = (parent: Node): void => {
     const block = getBlockContainer(parent);
     if (!block) return;
 
@@ -106,7 +106,11 @@ const observer = new MutationObserver((mutations) => {
 
         mutation.removedNodes.forEach((node) => {
             if (node.nodeType !== Node.ELEMENT_NODE) return;
-            if (node.tagName === 'FONT' || (node.querySelector && node.querySelector('font'))) {
+            if (
+                (node as Element).tagName === 'FONT' ||
+                ((node as Partial<Element>).querySelector &&
+                    (node as Element).querySelector('font'))
+            ) {
                 scheduleShadowCleanup(mutation.target);
             }
         });
@@ -134,7 +138,7 @@ const htmlObserver = new MutationObserver(() => {
 });
 
 // 이미 번역이 끝난 페이지에서 토글을 켠 경우 mutation이 더 오지 않으므로 직접 렌더한다.
-const renderExistingTranslations = () => {
+const renderExistingTranslations = (): void => {
     if (!document.body) return;
 
     document.body.querySelectorAll('font').forEach((font) => queueBlock(font.parentNode));
@@ -145,7 +149,7 @@ const renderExistingTranslations = () => {
  * 원문 스냅샷은 확장이 꺼져 있어도 계속 모은다.
  * 이미 번역된 페이지에서 토글을 켜는 경우에도 원문을 복원할 수 있어야 한다.
  */
-export const startObserver = () => {
+export const startObserver = (): void => {
     if (isObserverRunning || !document.body) return;
 
     wasPageTranslated = isPageTranslated();
@@ -159,7 +163,7 @@ export const startObserver = () => {
     isObserverRunning = true;
 };
 
-export const setEnabled = (value) => {
+export const setEnabled = (value: boolean): void => {
     isEnabled = value;
 
     if (!isEnabled) {

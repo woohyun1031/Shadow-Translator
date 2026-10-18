@@ -12,29 +12,33 @@ const skipTags = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE', 'IFRAME', '
  *
  * font 노드를 특별 취급하지 않는다는 점이 중요하다. 크롬 번역기는 노드를 1:1로 교체하지
  * 않고 어순에 맞춰 인라인 요소를 재배치·병합하므로, font에서 원문을 되돌리려는 시도는
- * 원리적으로 실패한다. 원문은 번역 전에 미리 보관한다 (core/snapshot.js).
+ * 원리적으로 실패한다. 원문은 번역 전에 미리 보관한다 (core/snapshot.ts).
  */
-export function collectText(element) {
+export function collectText(element: Element | null): string {
     if (!element) return '';
 
     let text = '';
 
     for (let child of element.childNodes) {
         if (child.nodeType === Node.TEXT_NODE) {
-            text += child.textContent;
+            text += child.textContent!;
             continue;
         }
 
         if (child.nodeType !== Node.ELEMENT_NODE) continue;
 
-        if (child.classList && child.classList.contains('echo-original-text')) continue;
+        if (
+            (child as Element).classList &&
+            (child as Element).classList.contains('echo-original-text')
+        )
+            continue;
 
-        const tag = child.tagName.toUpperCase();
+        const tag = (child as Element).tagName.toUpperCase();
         if (skipTags.has(tag)) continue;
         if (structuralTags.has(tag)) continue;
-        if (isElementHidden(child, { useComputedStyle: false })) continue;
+        if (isElementHidden(child as Element, { useComputedStyle: false })) continue;
 
-        text += collectText(child);
+        text += collectText(child as Element);
     }
 
     return text;
