@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Shadow Translator demo</title>
+        <!--
+            Screenshot page for README and Chrome Web Store.
+
+            demo.html          English source  → translate to Korean  (README.ko.md)
+            demo.html?lang=ko  Korean source   → translate to English (README.md)
+
+            Serve over http (e.g. `npx serve docs`), pick the source language,
+            reload, then translate with Chrome. Recommended capture: 1280x800.
+        -->
+        <style>
+            :root {
+                --ink: #16171a;
+                --muted: #6b6e76;
+                --rule: #e6e7ea;
+                --bg: #ffffff;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--ink);
+            }
+            body {
+                font:
+                    18px/1.65 -apple-system,
+                    BlinkMacSystemFont,
+                    'Segoe UI',
+                    'Apple SD Gothic Neo',
+                    'Malgun Gothic',
+                    Roboto,
+                    sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+            header.bar {
+                border-bottom: 1px solid var(--rule);
+            }
+            header.bar .inner {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 18px 24px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+                color: var(--muted);
+            }
+            header.bar .brand {
+                color: var(--ink);
+                font-weight: 600;
+                letter-spacing: -0.01em;
+            }
+            .lang-switch a {
+                color: var(--muted);
+                text-decoration: none;
+                padding: 2px 6px;
+                border-radius: 4px;
+            }
+            .lang-switch a[aria-current='true'] {
+                color: var(--bg);
+                background: var(--ink);
+            }
+            main {
+                max-width: 720px;
+                margin: 0 auto;
+                padding: 56px 24px 96px;
+            }
+            .kicker {
+                font-size: 13px;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--muted);
+                margin: 0 0 12px;
+            }
+            h1 {
+                font-size: 40px;
+                line-height: 1.15;
+                letter-spacing: -0.02em;
+                margin: 0 0 16px;
+            }
+            .dek {
+                font-size: 20px;
+                color: var(--muted);
+                margin: 0 0 40px;
+            }
+            h2 {
+                font-size: 22px;
+                letter-spacing: -0.01em;
+                margin: 48px 0 12px;
+            }
+            p {
+                margin: 0 0 20px;
+            }
+            a {
+                color: var(--ink);
+                text-underline-offset: 3px;
+            }
+            ol {
+                padding-left: 22px;
+                margin: 0 0 20px;
+            }
+            li {
+                margin: 0 0 12px;
+            }
+            blockquote {
+                margin: 32px 0;
+                padding: 4px 0 4px 20px;
+                border-left: 3px solid var(--ink);
+                font-size: 21px;
+                line-height: 1.5;
+            }
+            footer {
+                border-top: 1px solid var(--rule);
+                margin-top: 56px;
+                padding-top: 20px;
+                font-size: 14px;
+                color: var(--muted);
+            }
+        </style>
+    </head>
+    <body>
+        <header class="bar">
+            <div class="inner">
+                <span class="brand">Field Notes</span>
+                <nav class="lang-switch notranslate" translate="no" aria-label="Source language">
+                    <a href="?lang=en" data-lang="en">EN</a>
+                    <a href="?lang=ko" data-lang="ko">KO</a>
+                </nav>
+            </div>
+        </header>
+
+        <main data-lang="en">
+            <p class="kicker">Language</p>
+            <h1>Lost in Translation</h1>
+            <p class="dek">Machine translation is fluent. Fluent is not the same as right.</p>
+
+            <p>
+                Modern translation reads smoothly, which is exactly the problem. When a sentence
+                comes out wrong, it rarely looks wrong. It looks like a perfectly ordinary sentence
+                that happens to mean something else.
+            </p>
+
+            <h2>Three sentences that translate cleanly and mean the opposite</h2>
+
+            <ol>
+                <li>
+                    <strong>"The proposal was tabled."</strong> In the United States, the proposal
+                    was postponed. In the United Kingdom, it was put up for discussion.
+                </li>
+                <li>
+                    <strong>"Please revert by Friday."</strong> In Indian English, this simply means
+                    reply by Friday. Elsewhere, it sounds like a request to undo something.
+                </li>
+                <li>
+                    <strong>"I could care less."</strong> Despite the words, the speaker almost
+                    always means they do not care at all.
+                </li>
+            </ol>
+
+            <blockquote>
+                The translation tells you what was probably said. The original tells you what was
+                actually said.
+            </blockquote>
+
+            <h2>Keep the source in view</h2>
+
+            <p>
+                Switching a whole page back and forth breaks your reading. A better habit is to keep
+                the original in your peripheral vision and glance down only when a sentence feels
+                off. Read the <a href="#">style guide</a>, check the <a href="#">glossary</a>, and
+                when in doubt, trust the source over the summary.
+            </p>
+
+            <footer>
+                Demo page for Shadow Translator. All text is original and free to reuse.
+            </footer>
+        </main>
+
+        <main data-lang="ko">
+            <p class="kicker">언어</p>
+            <h1>번역에서 길을 잃다</h1>
+            <p class="dek">기계 번역은 매끄럽다. 매끄럽다고 맞는 것은 아니다.</p>
+
+            <p>
+                요즘 번역은 술술 읽힌다. 그게 바로 문제다. 잘못 옮겨진 문장도 좀처럼 틀려 보이지
+                않는다. 그저 평범한 문장처럼 보이는데, 뜻만 다를 뿐이다.
+            </p>
+
+            <h2>깔끔하게 번역되지만 뜻은 다른 세 문장</h2>
+
+            <ol>
+                <li>
+                    <strong>"괜찮아요."</strong> 무언가를 권할 때 들으면 대개 거절이다. 사과를 받을
+                    때 들으면 용서다. 같은 말이 상황에 따라 정반대가 된다.
+                </li>
+                <li>
+                    <strong>"언제 밥 한번 먹자."</strong> 약속이 아니라 인사다. 날짜를 잡자는 뜻으로
+                    받아들이면 곤란해진다.
+                </li>
+                <li>
+                    <strong>"긍정적으로 검토해 보겠습니다."</strong> 회의실에서는 대개 정중한 거절로
+                    통한다.
+                </li>
+            </ol>
+
+            <blockquote>
+                번역은 무슨 말을 했는지 알려 준다. 원문은 무슨 뜻이었는지 알려 준다.
+            </blockquote>
+
+            <h2>원문을 시야에 두라</h2>
+
+            <p>
+                페이지를 통째로 왔다 갔다 하면 읽는 흐름이 끊긴다. 더 나은 습관은 원문을 시야 한쪽에
+                두고, 문장이 어색하게 느껴질 때만 눈을 내리는 것이다.
+                <a href="#">표기 지침</a>을 읽고, <a href="#">용어집</a>을 확인하고, 애매할 때는
+                요약보다 원문을 믿어라.
+            </p>
+
+            <footer>
+                Shadow Translator 데모 페이지입니다. 모든 텍스트는 직접 작성했으며 자유롭게 써도
+                됩니다.
+            </footer>
+        </main>
+
+        <script>
+            // Keep only the chosen source language in the DOM before the extension snapshots it.
+            (function () {
+                var lang = new URLSearchParams(location.search).get('lang') === 'ko' ? 'ko' : 'en';
+                document.documentElement.lang = lang;
+                document.querySelectorAll('main[data-lang]').forEach(function (el) {
+                    if (el.dataset.lang !== lang) el.remove();
+                });
+                document.querySelectorAll('.lang-switch a').forEach(function (a) {
+                    a.setAttribute('aria-current', String(a.dataset.lang === lang));
+                });
+            })();
+        </script>
+    </body>
+</html>
