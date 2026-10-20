@@ -29,7 +29,7 @@ export function collectText(element: Element | null): string {
 
         if (
             (child as Element).classList &&
-            (child as Element).classList.contains('echo-original-text')
+            (child as Element).classList.contains('shadow-original-text')
         )
             continue;
 

@@ -75,7 +75,7 @@ const scheduleShadowCleanup = (parent: Node): void => {
 
     setTimeout(() => {
         if (!block.isConnected || block.querySelector('font')) return;
-        block.querySelectorAll('.echo-original-text').forEach((el) => el.remove());
+        block.querySelectorAll('.shadow-original-text').forEach((el) => el.remove());
         clearLastRendered(block);
     }, FONT_REMOVAL_GRACE_MS);
 };

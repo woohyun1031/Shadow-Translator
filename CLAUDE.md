@@ -33,7 +33,7 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 - [src/core/snapshot.ts](src/core/snapshot.ts) — 번역 전 원문을 블록별 `WeakMap`에 보관. `captureAll`/`captureBlock`/`getSnapshot`, 렌더 중복 방지용 `lastRendered`
 - [src/core/observer.ts](src/core/observer.ts) — MutationObserver 2종. (1) body의 childList에서 font 감지 + 미번역 블록 스냅샷, (2) html의 class 변화로 번역 시작/해제 감지
 - [src/core/extractor.ts](src/core/extractor.ts) — `collectText` 단일 함수. 블록이 직접 소유한 텍스트만 재귀 수집 (중첩 structural 자식 제외)
-- [src/core/renderer.ts](src/core/renderer.ts) — `.echo-original-text notranslate` div를 블록 내부 적절한 위치에 삽입. 원문 == 번역문이면 만들지 않음
+- [src/core/renderer.ts](src/core/renderer.ts) — `.shadow-original-text notranslate` div를 블록 내부 적절한 위치에 삽입. 원문 == 번역문이면 만들지 않음
 - [src/core/defaults.ts](src/core/defaults.ts) — `DEFAULT_SHADOW_STYLE`, `SHADOW_STYLE_RANGES`. 공용 타입(`ShadowStyle`, `RangeKey`, `ShadowStyleRange`)도 여기서 export한다
 - [src/utils/dom.ts](src/utils/dom.ts) — `structuralTags` 집합, `getBlockContainer`, `isElementHidden`
 - [src/popup.ts](src/popup.ts) / [popup.html](popup.html) — Enable Shadow 토글 UI

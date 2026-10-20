@@ -11,8 +11,8 @@ let snapshot: Snapshot;
 
 const $ = (id: string): HTMLElement => document.getElementById(id)!;
 const shadowOf = (el: Element): string | null =>
-    el.querySelector(':scope > .echo-original-text')?.textContent ?? null;
-const shadowCount = (): number => document.querySelectorAll('.echo-original-text').length;
+    el.querySelector(':scope > .shadow-original-text')?.textContent ?? null;
+const shadowCount = (): number => document.querySelectorAll('.shadow-original-text').length;
 
 /** MutationObserver 콜백(microtask)을 돌린 뒤 타이머를 ms만큼 진행한다. */
 const tick = async (ms = 0): Promise<void> => {
@@ -28,7 +28,7 @@ const stopTranslation = () => document.documentElement.classList.remove('transla
  */
 const replaceContent = (block: HTMLElement, markup: string): void => {
     Array.from(block.childNodes)
-        .filter((n) => !(n instanceof Element && n.classList.contains('echo-original-text')))
+        .filter((n) => !(n instanceof Element && n.classList.contains('shadow-original-text')))
         .forEach((n) => n.remove());
     block.insertAdjacentHTML('afterbegin', markup);
 };
@@ -110,7 +110,7 @@ describe('observer', () => {
         translate($('p'), '안녕 세상');
         await tick(RENDER_DEBOUNCE_MS);
 
-        expect($('p').querySelectorAll('.echo-original-text')).toHaveLength(1);
+        expect($('p').querySelectorAll('.shadow-original-text')).toHaveLength(1);
         expect(shadowOf($('p'))).toBe('Hello world');
     });
 

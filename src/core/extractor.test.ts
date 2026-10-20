@@ -31,9 +31,9 @@ describe('collectText', () => {
         ).toBe('ab');
     });
 
-    it('이미 렌더된 shadow(.echo-original-text)는 제외한다', () => {
+    it('이미 렌더된 shadow(.shadow-original-text)는 제외한다', () => {
         expect(
-            collectText(block('<p>번역문<span class="echo-original-text">original</span></p>'))
+            collectText(block('<p>번역문<span class="shadow-original-text">original</span></p>'))
         ).toBe('번역문');
     });
 
