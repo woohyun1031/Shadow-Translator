@@ -1,0 +1,14 @@
+{
+    "extName": {
+        "message": "Shadow Translator - Bilingual view",
+        "description": "Extension name. Max 75 characters."
+    },
+    "extDescription": {
+        "message": "Shows the original text as a gray line under each paragraph Chrome translates. No network requests. Open source.",
+        "description": "Store summary and manifest description. Max 132 characters."
+    },
+    "actionTitle": {
+        "message": "Shadow Translator",
+        "description": "Toolbar icon tooltip."
+    }
+}

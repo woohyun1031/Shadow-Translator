@@ -1,11 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Shadow Translator - 이중 언어 보기",
+    "name": "__MSG_extName__",
     "version": "1.2.0",
-    "description": "크롬 번역문 아래에 원문을 회색 한 줄로 표시합니다. 외부 통신 없음. 오픈소스.",
+    "description": "__MSG_extDescription__",
+    "default_locale": "en",
     "permissions": ["storage"],
     "action": {
-        "default_title": "Shadow Translator",
+        "default_title": "__MSG_actionTitle__",
         "default_popup": "popup.html"
     },
     "host_permissions": ["<all_urls>"],

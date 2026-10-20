@@ -29,6 +29,7 @@ module.exports = {
             patterns: [
                 { from: 'manifest.json', to: 'manifest.json' },
                 { from: 'popup.html', to: 'popup.html' },
+                { from: '_locales', to: '_locales' },
                 { from: 'assets', to: 'assets', noErrorOnMissing: true },
             ],
         }),
