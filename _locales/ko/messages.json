@@ -1,6 +1,6 @@
 {
     "extName": {
-        "message": "Shadow Translator - 이중 언어 보기",
+        "message": "Shadow Translator - 크롬 전용 이중 언어 보기",
         "description": "Extension name. Max 75 characters."
     },
     "extDescription": {
@@ -82,5 +82,9 @@
     "popupReport": {
         "message": "문제 신고",
         "description": "Footer link to a new GitHub issue."
+    },
+    "popupChromeOnly": {
+        "message": "구글 크롬 전용입니다. 이 브라우저의 번역기에서는 정상적으로 동작하지 않습니다.",
+        "description": "Popup notice shown only outside Google Chrome. Other Chromium browsers ship their own translators, which this extension cannot read."
     }
 }

@@ -1,4 +1,5 @@
 import { DEFAULT_SHADOW_STYLE, RangeKey, SHADOW_STYLE_RANGES, ShadowStyle } from './core/defaults';
+import { isGoogleChrome } from './browser';
 import { applyI18n } from './i18n';
 
 // 키가 없으면 빈 문자열이 오므로 영어 기본 문구로 대신한다.
@@ -34,6 +35,9 @@ function init() {
 
     const versionEl = document.getElementById('popVersion');
     if (versionEl) versionEl.textContent = `v${chrome.runtime.getManifest().version}`;
+
+    const browserNotice = document.getElementById('browserNotice');
+    if (browserNotice && !isGoogleChrome()) browserNotice.hidden = false;
 
     const popup = document.getElementById('popup');
     const toggleSwitch = document.getElementById('toggleSwitch') as HTMLInputElement | null;

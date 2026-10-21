@@ -206,6 +206,20 @@
             }
 
             /* Hint message (Enable 변경 후 안내) */
+            .browser-notice {
+                margin-bottom: 12px;
+                font-size: 11.5px;
+                color: var(--pop-text);
+                background-color: var(--pop-card);
+                padding: 10px 12px;
+                border-radius: 8px;
+                border: 1px solid var(--pop-border);
+                line-height: 1.4;
+                letter-spacing: 0.2px;
+            }
+            .browser-notice[hidden] {
+                display: none;
+            }
             .hint-message {
                 margin-bottom: 12px;
                 font-size: 11.5px;
@@ -501,6 +515,17 @@
                         <div class="name">Shadow Translator</div>
                         <div class="sub" data-i18n="popupSubtitle">Original under translation</div>
                     </div>
+                </div>
+
+                <!-- Chrome 외 브라우저에서만 보인다 (src/browser.ts) -->
+                <div
+                    id="browserNotice"
+                    class="browser-notice"
+                    role="note"
+                    hidden
+                    data-i18n="popupChromeOnly"
+                >
+                    Google Chrome only. This browser's translator isn't supported.
                 </div>
 
                 <!-- Enable toggle -->

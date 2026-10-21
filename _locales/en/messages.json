@@ -1,6 +1,6 @@
 {
     "extName": {
-        "message": "Shadow Translator - Bilingual view",
+        "message": "Shadow Translator - Bilingual view for Chrome",
         "description": "Extension name. Max 75 characters."
     },
     "extDescription": {
@@ -82,5 +82,9 @@
     "popupReport": {
         "message": "Report a problem",
         "description": "Footer link to a new GitHub issue."
+    },
+    "popupChromeOnly": {
+        "message": "Google Chrome only. This browser's translator isn't supported.",
+        "description": "Popup notice shown only outside Google Chrome. Other Chromium browsers ship their own translators, which this extension cannot read."
     }
 }
