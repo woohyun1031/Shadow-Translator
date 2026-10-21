@@ -1,0 +1,90 @@
+{
+    "extName": {
+        "message": "Shadow Translator - 크롬 전용 이중 언어 보기",
+        "description": "Extension name. Max 75 characters."
+    },
+    "extDescription": {
+        "message": "크롬 번역문 아래에 원문을 회색 한 줄로 표시합니다. 외부 통신 없음. 오픈소스.",
+        "description": "Store summary and manifest description. Max 132 characters."
+    },
+    "actionTitle": {
+        "message": "Shadow Translator",
+        "description": "Toolbar icon tooltip."
+    },
+    "popupSubtitle": {
+        "message": "Original under translation",
+        "description": "Popup header subtitle."
+    },
+    "popupEnableLabel": {
+        "message": "Enable Shadow",
+        "description": "Label of the on/off toggle."
+    },
+    "popupStatusActive": {
+        "message": "Active on this page",
+        "description": "Toggle status when on."
+    },
+    "popupStatusPaused": {
+        "message": "Paused — toggle to resume",
+        "description": "Toggle status when off."
+    },
+    "popupHintRerun": {
+        "message": "크롬 번역을 다시 실행하면 적용됩니다.",
+        "description": "Shown after toggling. Do not name Google Translate: the extension works with Chrome translation."
+    },
+    "popupStyleTitle": {
+        "message": "Shadow style",
+        "description": "Settings button and drawer title."
+    },
+    "popupStyleSettings": {
+        "message": "Shadow style settings",
+        "description": "Accessible label of the settings drawer."
+    },
+    "popupClose": {
+        "message": "닫기",
+        "description": "Closes the drawer without saving."
+    },
+    "popupColor": {
+        "message": "색상",
+        "description": "Style field."
+    },
+    "popupPickColor": {
+        "message": "색상 선택",
+        "description": "Tooltip of the custom color swatch."
+    },
+    "popupFontSize": {
+        "message": "글자 크기",
+        "description": "Style field."
+    },
+    "popupLineHeight": {
+        "message": "줄 간격",
+        "description": "Style field."
+    },
+    "popupOpacity": {
+        "message": "불투명도",
+        "description": "Style field."
+    },
+    "popupReset": {
+        "message": "초기화",
+        "description": "Resets style to defaults."
+    },
+    "popupCancel": {
+        "message": "취소",
+        "description": "Discards style changes."
+    },
+    "popupSave": {
+        "message": "저장",
+        "description": "Keeps style changes."
+    },
+    "popupHelp": {
+        "message": "도움말",
+        "description": "Footer link to troubleshooting."
+    },
+    "popupReport": {
+        "message": "문제 신고",
+        "description": "Footer link to a new GitHub issue."
+    },
+    "popupChromeOnly": {
+        "message": "구글 크롬 전용입니다. 이 브라우저의 번역기에서는 정상적으로 동작하지 않습니다.",
+        "description": "Popup notice shown only outside Google Chrome. Other Chromium browsers ship their own translators, which this extension cannot read."
+    }
+}

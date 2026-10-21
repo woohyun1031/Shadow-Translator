@@ -8,7 +8,7 @@ const block = (markup: string): HTMLElement => {
 };
 
 const shadowsOf = (el: Element): HTMLElement[] =>
-    Array.from(el.querySelectorAll<HTMLElement>(':scope > .echo-original-text'));
+    Array.from(el.querySelectorAll<HTMLElement>(':scope > .shadow-original-text'));
 
 beforeEach(() => {
     document.body.innerHTML = '';
@@ -24,7 +24,7 @@ describe('renderShadowText', () => {
         renderShadowText(p, 'Hello world', '안녕 세상');
 
         const [shadow] = shadowsOf(p);
-        expect(shadow.className).toBe('echo-original-text notranslate');
+        expect(shadow.className).toBe('shadow-original-text notranslate');
         expect(shadow.getAttribute('translate')).toBe('no');
         expect(shadow.textContent).toBe('Hello world');
         expect(p.lastChild).toBe(shadow);
@@ -117,7 +117,7 @@ describe('clearShadowTexts', () => {
 
         clearShadowTexts();
 
-        expect(document.querySelectorAll('.echo-original-text')).toHaveLength(0);
+        expect(document.querySelectorAll('.shadow-original-text')).toHaveLength(0);
     });
 
     it('container를 넘기면 그 안의 shadow만 지운다', () => {

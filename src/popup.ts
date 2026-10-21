@@ -1,4 +1,9 @@
 import { DEFAULT_SHADOW_STYLE, RangeKey, SHADOW_STYLE_RANGES, ShadowStyle } from './core/defaults';
+import { isGoogleChrome } from './browser';
+import { applyI18n } from './i18n';
+
+// 키가 없으면 빈 문자열이 오므로 영어 기본 문구로 대신한다.
+const t = (key: string, fallback: string) => chrome.i18n.getMessage(key) || fallback;
 
 const FORMATTERS: Record<RangeKey, (v: number) => string> = {
     fontSize: (v) => `${Number(v).toFixed(2)}em`,
@@ -25,6 +30,15 @@ function sanitizeStyle(style: ShadowStyle): ShadowStyle {
 }
 
 function init() {
+    document.documentElement.lang = chrome.i18n.getUILanguage();
+    applyI18n(document, (key) => chrome.i18n.getMessage(key));
+
+    const versionEl = document.getElementById('popVersion');
+    if (versionEl) versionEl.textContent = `v${chrome.runtime.getManifest().version}`;
+
+    const browserNotice = document.getElementById('browserNotice');
+    if (browserNotice && !isGoogleChrome()) browserNotice.hidden = false;
+
     const popup = document.getElementById('popup');
     const toggleSwitch = document.getElementById('toggleSwitch') as HTMLInputElement | null;
     const enableSub = document.getElementById('enableSub') as HTMLElement;
@@ -93,7 +107,9 @@ function init() {
     // --- Enable toggle ---
     function setEnabledUI(enabled: boolean) {
         popup!.dataset.popupEnabled = enabled ? 'true' : 'false';
-        enableSub.textContent = enabled ? 'Active on this page' : 'Paused — toggle to resume';
+        enableSub.textContent = enabled
+            ? t('popupStatusActive', 'Active on this page')
+            : t('popupStatusPaused', 'Paused — toggle to resume');
     }
 
     chrome.storage.local.get(['isEnabled', 'shadowStyle'], (result) => {
@@ -113,7 +129,7 @@ function init() {
         chrome.storage.local.set({ isEnabled: on });
         setEnabledUI(on);
         hintMessage.style.display = 'block';
-        hintMessage.innerText = 'Please re-run Google Translate to apply changes.';
+        hintMessage.innerText = t('popupHintRerun', 'Re-run Chrome translation to apply changes.');
     });
 
     // --- Drawer ---

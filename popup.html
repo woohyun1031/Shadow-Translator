@@ -206,6 +206,20 @@
             }
 
             /* Hint message (Enable 변경 후 안내) */
+            .browser-notice {
+                margin-bottom: 12px;
+                font-size: 11.5px;
+                color: var(--pop-text);
+                background-color: var(--pop-card);
+                padding: 10px 12px;
+                border-radius: 8px;
+                border: 1px solid var(--pop-border);
+                line-height: 1.4;
+                letter-spacing: 0.2px;
+            }
+            .browser-notice[hidden] {
+                display: none;
+            }
             .hint-message {
                 margin-bottom: 12px;
                 font-size: 11.5px;
@@ -499,15 +513,28 @@
                     <img src="assets/logo.svg" alt="" class="pop-logo" aria-hidden="true" />
                     <div class="pop-title">
                         <div class="name">Shadow Translator</div>
-                        <div class="sub">Original under translation</div>
+                        <div class="sub" data-i18n="popupSubtitle">Original under translation</div>
                     </div>
+                </div>
+
+                <!-- Chrome 외 브라우저에서만 보인다 (src/browser.ts) -->
+                <div
+                    id="browserNotice"
+                    class="browser-notice"
+                    role="note"
+                    hidden
+                    data-i18n="popupChromeOnly"
+                >
+                    Google Chrome only. This browser's translator isn't supported.
                 </div>
 
                 <!-- Enable toggle -->
                 <div class="toggle-row">
                     <div class="tr-text">
-                        <div class="tr-label">Enable Shadow</div>
-                        <div class="tr-sub" id="enableSub">Active on this page</div>
+                        <div class="tr-label" data-i18n="popupEnableLabel">Enable Shadow</div>
+                        <div class="tr-sub" id="enableSub" data-i18n="popupStatusActive">
+                            Active on this page
+                        </div>
                     </div>
                     <label class="switch">
                         <input type="checkbox" id="toggleSwitch" />
@@ -534,7 +561,7 @@
                                 d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
                             />
                         </svg>
-                        Shadow style
+                        <span data-i18n="popupStyleTitle">Shadow style</span>
                     </span>
                     <svg
                         class="st-chev"
@@ -568,10 +595,10 @@
                                 <path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4" />
                                 <circle cx="12" cy="17" r="0.5" fill="currentColor" />
                             </svg>
-                            Help
+                            <span data-i18n="popupHelp">Help</span>
                         </a>
                         <a
-                            href="https://github.com/woohyun1031/Shadow-Translator/issues"
+                            href="https://github.com/woohyun1031/Shadow-Translator/issues/new/choose"
                             target="_blank"
                             rel="noopener noreferrer"
                             id="lnkIssue"
@@ -586,26 +613,34 @@
                                 <path d="M12 8v4" />
                                 <circle cx="12" cy="16" r="0.5" fill="currentColor" />
                             </svg>
-                            Issue
+                            <span data-i18n="popupReport">Report a problem</span>
                         </a>
                     </div>
-                    <div class="pop-version">v1.1.3</div>
+                    <div class="pop-version" id="popVersion"></div>
                 </div>
             </div>
 
             <!-- Drawer -->
             <div class="drawer-scrim" id="scrim"></div>
-            <div class="drawer" id="drawer" role="dialog" aria-label="Shadow style settings">
+            <div
+                class="drawer"
+                id="drawer"
+                role="dialog"
+                aria-label="Shadow style settings"
+                data-i18n-aria-label="popupStyleSettings"
+            >
                 <div class="handle"></div>
                 <div class="d-header">
-                    <div class="d-title">Shadow style</div>
-                    <button class="d-close" id="closeDrawer" type="button">Close</button>
+                    <div class="d-title" data-i18n="popupStyleTitle">Shadow style</div>
+                    <button class="d-close" id="closeDrawer" type="button" data-i18n="popupClose">
+                        Close
+                    </button>
                 </div>
 
                 <!-- Color -->
                 <div class="field">
                     <div class="f-head">
-                        <span class="f-label">Color</span>
+                        <span class="f-label" data-i18n="popupColor">Color</span>
                         <span class="f-out" id="colorOut">#787878</span>
                     </div>
                     <div class="swatches" id="swatches">
@@ -645,7 +680,11 @@
                             data-color="#6f9bd1"
                             style="background: #6f9bd1"
                         ></button>
-                        <label class="swatch custom" title="Pick color">
+                        <label
+                            class="swatch custom"
+                            title="Pick color"
+                            data-i18n-title="popupPickColor"
+                        >
                             <span class="pencil">✎</span>
                             <input type="color" id="customColor" value="#787878" />
                         </label>
@@ -655,7 +694,7 @@
                 <!-- Font size -->
                 <div class="field">
                     <div class="f-head">
-                        <span class="f-label">Font size</span>
+                        <span class="f-label" data-i18n="popupFontSize">Font size</span>
                         <span class="f-out" id="sizeOut">0.90em</span>
                     </div>
                     <input
@@ -672,7 +711,7 @@
                 <!-- Line height -->
                 <div class="field">
                     <div class="f-head">
-                        <span class="f-label">Line height</span>
+                        <span class="f-label" data-i18n="popupLineHeight">Line height</span>
                         <span class="f-out" id="lineOut">1.4</span>
                     </div>
                     <input
@@ -689,7 +728,7 @@
                 <!-- Opacity -->
                 <div class="field">
                     <div class="f-head">
-                        <span class="f-label">Opacity</span>
+                        <span class="f-label" data-i18n="popupOpacity">Opacity</span>
                         <span class="f-out" id="opOut">0.80</span>
                     </div>
                     <input
@@ -704,9 +743,15 @@
                 </div>
 
                 <div class="actions">
-                    <button type="button" class="btn-reset" id="btnReset">Reset</button>
-                    <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
-                    <button type="button" class="btn-save" id="btnSave">Save</button>
+                    <button type="button" class="btn-reset" id="btnReset" data-i18n="popupReset">
+                        Reset
+                    </button>
+                    <button type="button" class="btn-cancel" id="btnCancel" data-i18n="popupCancel">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn-save" id="btnSave" data-i18n="popupSave">
+                        Save
+                    </button>
                 </div>
             </div>
         </div>

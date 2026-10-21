@@ -1,77 +1,126 @@
-# **Shadow Translator**
+<p align="center">
+  <img src="assets/logo.svg" width="64" height="64" alt="Shadow Translator logo">
+</p>
 
-크롬의 번역문은 유지하고, 그 바로 아래에 영어 원문을 그림자처럼 함께 보여주는 스마트한 생산성 도구입니다.
+<h1 align="center">Shadow Translator</h1>
 
-💡 **만들게 된 계기:** 번역기를 돌렸는데 문장이 모호해서 결국 원문으로 다시 전환해 확인한 적, 많지 않으신가요? 이 번거롭고 반복되는 과정이 잦아지면서 너무 귀찮아져서 직접 만들었습니다.
+<p align="center">
+  Shows the original text under Chrome's built-in page translation.<br>
+  <sub>Google Chrome on desktop only.</sub>
+</p>
 
-💸 **가입 NO, 결제 NO** 따로 회원가입이나 결제를 할 필요가 전혀 없습니다. 그냥 평소에 사용하시던 **크롬 내장 번역 기능**을 그대로 사용하시면 알아서 작동합니다.
+<p align="center">
+  <a href="https://chromewebstore.google.com/detail/njhfceigjibchcnokjaoapmobelimlnm">Chrome Web Store</a> ·
+  <a href="README.ko.md">한국어</a>
+</p>
 
-**Shadow Translator**는 크롬의 내장 번역 엔진이 생성한 번역문 바로 아랫줄에 원문을 자연스럽게 덧붙여줍니다. 번역된 내용을 읽으면서, 필요할 때마다 원문을 즉시 대조해 보세요.
-
-🚀 **언젠가 크롬이 오피셜하게 이런 기능을 만들어주기를 바라며... 크롬이 오피셜하게 만들어주는 그날까지 편하게 사용해주세요!**
-
-## **주요 기능**
-
-- **원문 섀도우(Original as Shadow)**: 크롬이 변환한 번역문을 그대로 두되, 그 아래에 원문을 배치하여 번역의 맥락을 완벽하게 파악할 수 있습니다.
-- **세련되고 절제된 스타일링**: 아래에 붙는 원문은 번역문보다 약간 작고 부드러운 회색 톤으로 표시됩니다. 가독성을 방해하지 않으면서도 필요할 때 명확히 눈에 들어옵니다.
-- **리소스 최적화 및 네이티브 완벽 호환**: 별도의 외부 번역 API를 사용하지 않습니다. 크롬 내장 번역 엔진의 렌더링 과정을 최적화하여 활용하므로, 메모리 점유율이 매우 낮고 반응 속도가 빠릅니다.
-- **철저한 프라이버시 보호 (Privacy-First)**: 사용자의 데이터를 외부 서버로 전송하지 않습니다. 모든 번역 프로세스는 브라우저 로컬 환경 내에서 안전하게 처리됩니다.
-
-## **이런 분들께 추천합니다**
-
-- **대학원생 및 연구자**: 영문 논문의 미묘한 어감을 원문과 함께 대조하며 읽고 싶은 분
-- **개발자**: 최신 기술 공식 문서를 빠르게 훑어보면서 핵심 용어는 원문으로 확인하고 싶은 분
-- **언어 학습자**: 번역기에 의존하기보다 원문 해석 능력을 함께 키우고 싶은 분
-- **해외 직구족**: 상품 상세 설명과 리뷰의 정확한 의미를 원문과 함께 파악하고 싶은 분
+<!-- <p align="center">
+  <img src="docs/screenshot-en.png" width="570" alt="A Korean page translated into English by Chrome, with the Korean original shown in gray under each paragraph">
+</p> -->
 
 ---
 
-## **사용 방법**
+## Overview
 
-1. 브라우저 우측 상단 퍼즐 아이콘에서 **Shadow Translator**를 고정하거나 활성화합니다.
-2. 번역이 필요한 웹사이트(예: Amazon, Reddit, 해외 뉴스 등)에 접속합니다.
-3. 마우스 우클릭 후 `[한국어로 번역]`을 선택하거나 주소창의 번역 아이콘을 클릭합니다.
-4. 번역된 문장 바로 아래에 원문이 그림자처럼 나타납니다!
-5. https://www.youtube.com/watch?v=ta9WaXq1aoc&feature=youtu.be
+Chrome's page translation replaces the original text. When a sentence reads ambiguously, the only way to check it is to switch the whole page back.
 
----
+Shadow Translator keeps the translation and adds the original underneath each paragraph, in a smaller gray line. It does not translate anything itself. Translation is done entirely by Chrome.
 
-# Shadow Translator (English)
+## Features
 
-A productivity toolkit that keeps Chrome's translation while appending the original text directly below it as a "shadow" reference.
+- **Paragraph-level originals.** The original appears directly under the translated paragraph it belongs to.
+- **Language-agnostic.** Works with any source and target language Chrome supports.
+- **No network access.** The extension makes no network requests and has no backend.
+- **Small.** About 22 KB packaged, no runtime dependencies.
+- **Adjustable style.** Color, font size, line height and opacity.
 
-💡 **Motivation:** Have you ever translated a page, only to find the translation ambiguous, forcing you to constantly toggle back to the original text? I built this because that frequent, repetitive process became too annoying.
+## Installation
 
-💸 **No Sign-up, No Payment:** You don't need to register or pay for anything. Just use the **built-in Chrome translation** feature as you always do.
+Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/njhfceigjibchcnokjaoapmobelimlnm).
 
-**Shadow Translator** integrates with Chrome's native engine to ensure the original lines remain visible right under the translated ones. Cross-reference translations with their source instantly without toggling back and forth.
+**Requires Google Chrome on desktop.** The extension relies on how Chrome's own translator rewrites the page. Other browsers, including Chromium-based ones like Edge, Whale or Brave, are not supported.
 
-🚀 **Until the day Chrome officially makes this a native feature! Enjoy seamless reading.**
+## Usage
 
-## Key Features
+1. Open a page in a foreign language.
+2. Translate it with Chrome, from the translate icon in the address bar or by right-clicking and choosing **Translate**.
+3. The original text appears under each translated paragraph.
 
-- **Original as Shadow**: Instead of replacing text, it appends the original sentence directly under the translated output for seamless comparison.
-- **Clean & Minimal Aesthetic**: The appended original text is styled with a subtly smaller font and soft gray tones, staying out of the way until you need it.
-- **Lightning Fast & Privacy-Focused**: Shadow Translator uses **ZERO external APIs**. By hooking into Chrome's native translation process, it ensures peak performance and total privacy. **No data is ever sent to external servers.**
+Reverting the translation removes the original lines. Use the toolbar icon to turn the extension on or off.
 
-## Target Audience
+## How it works
 
-- **Researchers & Students**: For those who need to verify the nuance of translated academic papers against the original source.
-- **Developers**: For scanning translated documentation while keeping original technical terms in sight.
-- **Language Learners**: For understanding the gist via translation first, then studying the original sentence structure right below.
-- **News Buffs**: For ensuring accuracy by having the original text always available for reference.
+Chrome's translator does not replace text nodes one to one. It reorders and merges inline nodes to fit the target language's word order, so the original cannot be reconstructed from the translated DOM.
 
----
+Shadow Translator therefore captures the original before translation:
 
-## How to Use
+1. **Snapshot.** Each paragraph-level block is recorded on page load, when Chrome marks the page as translating, and when new blocks are inserted (SPA navigation, infinite scroll).
+2. **Detect.** A `MutationObserver` waits for the translated content to arrive, debounced at 300 ms to handle batched responses.
+3. **Render.** The stored original is inserted under each translated block, marked `notranslate` so it is never translated itself.
+4. **Clean up.** When translation is reverted, every inserted line is removed.
 
-1. Pin or activate **Shadow Translator** from the extensions puzzle icon in the top right corner of your browser.
-2. Visit a website you want to translate (e.g., Amazon, Reddit, global news).
-3. Right-click and select `[Translate to ...]` (your target language), or click the translate icon in the address bar.
-4. The original text will smoothly appear as a shadow right below the translated sentences!
-5. https://www.youtube.com/watch?v=ta9WaXq1aoc&feature=youtu.be
+If a block has no reliable snapshot, nothing is rendered for it. Showing no original is preferred over showing a wrong one.
 
----
+## Privacy and permissions
 
-> [!NOTE]
-> This is NOT an official product of Google or Google Translate and has no affiliation with Google LLC. Shadow Translator is an independent productivity tool designed to enhance your web experience.
+Shadow Translator does not collect, transmit or sell any data. The only thing it stores is the on/off state and style settings, in `chrome.storage.local` on your device.
+
+Page translation itself is performed by Chrome, which sends page text to Google for translation. That behavior belongs to Chrome and is independent of this extension.
+
+| Permission                  | Why it is needed                                                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `storage`                   | Saves the on/off state and style settings locally.                                                                             |
+| Access to all sites, frames | The original must be captured before translation starts, and the extension cannot know in advance which page you'll translate. |
+
+## Troubleshooting
+
+| Symptom                          | Cause and fix                                                                                                                                         |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No original text appears         | The tab was opened before the extension was installed. Reload the page and translate again.                                                           |
+| Some paragraphs have no original | The original is identical to the translation, or the block was not captured before translation. Expected.                                             |
+| Page layout looks broken         | Turn the extension off from the toolbar and [open an issue](https://github.com/woohyun1031/Shadow-Translator/issues) with the URL and Chrome version. |
+
+## Limitations
+
+- Shadow Translator depends on how Chrome's translator modifies the DOM. A Chrome update can break it.
+- Google Chrome on desktop only. It works with Chrome's built-in page translation, not with other browsers' translators or other translation extensions.
+
+## Development
+
+Requires Node.js and npm. Written in TypeScript, bundled with webpack.
+
+```bash
+npm ci
+npm run build       # production build → dist/
+npm run watch       # development build with watch
+npm test            # Vitest + jsdom
+npm run typecheck   # tsc --noEmit
+npm run format      # Prettier
+```
+
+Load `dist/` from `chrome://extensions` with **Developer mode** on, using **Load unpacked**.
+
+```
+src/
+├── content.ts          entry point: snapshot, observe, load settings
+├── popup.ts            toolbar popup
+├── core/
+│   ├── snapshot.ts     stores originals per block before translation
+│   ├── observer.ts     detects translation start, arrival and revert
+│   ├── extractor.ts    collects a block's own text
+│   ├── renderer.ts     inserts and removes the original lines
+│   └── defaults.ts     default style and ranges
+└── utils/dom.ts        block detection helpers
+```
+
+Tests live next to the source as `*.test.ts`.
+
+## Contributing
+
+Bug reports are most useful with the page URL, Chrome version and the language pair. Pull requests are welcome; please run `npm test`, `npm run typecheck` and `npm run format` before submitting.
+
+## License
+
+[MIT](LICENSE)
+
+Shadow Translator is an independent project and is not affiliated with or endorsed by Google LLC.

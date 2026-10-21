@@ -16,7 +16,7 @@ function applyStyleToNode(el: HTMLElement, s: ShadowStyle): void {
 export function setShadowStyle(partial?: Partial<ShadowStyle> | null): void {
     currentStyle = { ...DEFAULT_SHADOW_STYLE, ...(partial || {}) };
     document
-        .querySelectorAll<HTMLElement>('.echo-original-text')
+        .querySelectorAll<HTMLElement>('.shadow-original-text')
         .forEach((el) => applyStyleToNode(el, currentStyle));
 }
 
@@ -35,7 +35,7 @@ export function renderShadowText(
     for (let child of block.childNodes) {
         if (
             child.nodeType === Node.ELEMENT_NODE &&
-            (child as Element).classList.contains('echo-original-text')
+            (child as Element).classList.contains('shadow-original-text')
         ) {
             grayTextDiv = child as HTMLElement;
             break;
@@ -58,7 +58,7 @@ export function renderShadowText(
 
     if (!grayTextDiv) {
         grayTextDiv = document.createElement('div');
-        grayTextDiv.className = 'echo-original-text notranslate';
+        grayTextDiv.className = 'shadow-original-text notranslate';
         grayTextDiv.setAttribute('translate', 'no');
         applyStyleToNode(grayTextDiv, currentStyle);
 
@@ -85,5 +85,5 @@ export function renderShadowText(
 }
 
 export function clearShadowTexts(container: Document | Element = document): void {
-    container.querySelectorAll('.echo-original-text').forEach((el) => el.remove());
+    container.querySelectorAll('.shadow-original-text').forEach((el) => el.remove());
 }
