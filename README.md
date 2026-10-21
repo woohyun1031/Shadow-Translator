@@ -32,7 +32,7 @@ Shadow Translator keeps the translation and adds the original underneath each pa
 - **Language-agnostic.** Works with any source and target language Chrome supports.
 - **No network access.** The extension makes no network requests and has no backend.
 - **Small.** About 22 KB packaged, no runtime dependencies.
-- **Adjustable style.** Color, font size, line height and opacity. Defaults work without configuration.
+- **Adjustable style.** Color, font size, line height and opacity.
 
 ## Installation
 
@@ -72,8 +72,6 @@ Page translation itself is performed by Chrome, which sends page text to Google 
 | `storage`                   | Saves the on/off state and style settings locally.                                                                             |
 | Access to all sites, frames | The original must be captured before translation starts, and the extension cannot know in advance which page you'll translate. |
 
-The full source is in this repository.
-
 ## Troubleshooting
 
 | Symptom                          | Cause and fix                                                                                                                                         |
@@ -84,9 +82,8 @@ The full source is in this repository.
 
 ## Limitations
 
-- Shadow Translator depends on how Chrome's translator modifies the DOM. A Chrome update can break it; fixes are prioritized when that happens.
+- Shadow Translator depends on how Chrome's translator modifies the DOM. A Chrome update can break it.
 - Google Chrome on desktop only. It works with Chrome's built-in page translation, not with other browsers' translators or other translation extensions.
-- If Chrome adds this capability natively, this extension will be retired.
 
 ## Development
 
