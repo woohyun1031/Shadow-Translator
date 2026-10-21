@@ -12,19 +12,19 @@
         "description": "Toolbar icon tooltip."
     },
     "popupSubtitle": {
-        "message": "번역문 아래 원문",
+        "message": "Original under translation",
         "description": "Popup header subtitle."
     },
     "popupEnableLabel": {
-        "message": "원문 표시",
+        "message": "Enable Shadow",
         "description": "Label of the on/off toggle."
     },
     "popupStatusActive": {
-        "message": "이 페이지에서 동작 중",
+        "message": "Active on this page",
         "description": "Toggle status when on."
     },
     "popupStatusPaused": {
-        "message": "일시 중지됨 — 켜면 다시 동작",
+        "message": "Paused — toggle to resume",
         "description": "Toggle status when off."
     },
     "popupHintRerun": {
@@ -32,11 +32,11 @@
         "description": "Shown after toggling. Do not name Google Translate: the extension works with Chrome translation."
     },
     "popupStyleTitle": {
-        "message": "원문 스타일",
+        "message": "Shadow style",
         "description": "Settings button and drawer title."
     },
     "popupStyleSettings": {
-        "message": "원문 스타일 설정",
+        "message": "Shadow style settings",
         "description": "Accessible label of the settings drawer."
     },
     "popupClose": {
