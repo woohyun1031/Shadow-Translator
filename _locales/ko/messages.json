@@ -4,7 +4,7 @@
         "description": "Extension name. Max 75 characters."
     },
     "extDescription": {
-        "message": "크롬 번역문 아래에 원문을 회색 한 줄로 표시합니다. 외부 통신 없음. 오픈소스.",
+        "message": "크롬 번역문 아래에 원문을 회색 한 줄로 표시합니다.",
         "description": "Store summary and manifest description. Max 132 characters."
     },
     "actionTitle": {
