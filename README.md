@@ -14,9 +14,9 @@
   <a href="README.ko.md">한국어</a>
 </p>
 
-<p align="center">
+<!-- <p align="center">
   <img src="docs/screenshot-en.png" width="570" alt="A Korean page translated into English by Chrome, with the Korean original shown in gray under each paragraph">
-</p>
+</p> -->
 
 ---
 

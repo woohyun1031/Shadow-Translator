@@ -14,9 +14,9 @@
   <a href="README.md">English</a>
 </p>
 
-<p align="center">
+<!-- <p align="center">
   <img src="docs/screenshot.png" width="544" alt="영어 페이지를 크롬으로 한국어 번역한 화면. 각 문단 아래에 영어 원문이 회색으로 표시됨">
-</p>
+</p> -->
 
 ---
 
