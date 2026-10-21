@@ -36,7 +36,9 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 - [src/core/renderer.ts](src/core/renderer.ts) — `.shadow-original-text notranslate` div를 블록 내부 적절한 위치에 삽입. 원문 == 번역문이면 만들지 않음
 - [src/core/defaults.ts](src/core/defaults.ts) — `DEFAULT_SHADOW_STYLE`, `SHADOW_STYLE_RANGES`. 공용 타입(`ShadowStyle`, `RangeKey`, `ShadowStyleRange`)도 여기서 export한다
 - [src/utils/dom.ts](src/utils/dom.ts) — `structuralTags` 집합, `getBlockContainer`, `isElementHidden`
-- [src/popup.ts](src/popup.ts) / [popup.html](popup.html) — Enable Shadow 토글 UI
+- [src/popup.ts](src/popup.ts) / [popup.html](popup.html) — Enable Shadow 토글 UI. 버전 표시는 `chrome.runtime.getManifest().version`에서 읽는다(하드코딩 금지)
+- [src/i18n.ts](src/i18n.ts) — `applyI18n`. popup.html의 `data-i18n` 속성을 `chrome.i18n.getMessage`로 채운다
+- [\_locales/](_locales/) — `en`(default_locale)·`ko` messages.json. manifest 이름·설명·툴팁과 팝업 문구
 - [manifest.json](manifest.json) — MV3, `storage` 권한, `<all_urls>` host_permissions, all_frames
 - [tsconfig.json](tsconfig.json) — `strict: true`, `target: ES2020`, `rootDir: ./src`
 
@@ -57,8 +59,19 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 - **Prettier** ([.prettierrc.json](.prettierrc.json)): 4-space, single quotes, `;` 사용, `printWidth: 100`, `trailingComma: "es5"`. `*.md`도 포맷 대상 ([.prettierignore](.prettierignore) 참고).
 - **TypeScript** ([tsconfig.json](tsconfig.json)): `strict: true`. `ts-loader`가 빌드 시 타입 체크까지 하므로 `npm run build`가 곧 타입 검증이다. 공용 타입은 [src/core/defaults.ts](src/core/defaults.ts)에 모은다.
 - **모듈:** ES modules — webpack이 번들. `chrome.*` API는 `typeof chrome !== 'undefined'` 가드 후 사용 ([src/content.ts:20](src/content.ts#L20)).
+- **콘솔 출력:** content script는 모든 사이트·프레임에서 돈다. 디버그 로그는 `if (__DEV__)`로 감싼다(webpack DefinePlugin, `npm run watch`에서만 true). `console.error`는 그대로 둔다.
 - **커밋 메시지:** 한국어 + conventional prefix (`feat:`, `refactor:`, `chore:`, `update:`, `docs:`).
 - **버전:** [manifest.json](manifest.json)과 [package.json](package.json)의 version 필드를 함께 올린다.
+
+## 다국어 (i18n)
+
+- **새 문구는 `en`과 `ko`에 함께 추가한다.** 키 집합이 다르면 [src/locales.test.ts](src/locales.test.ts)가 실패한다. `en`이 `default_locale`이라 모든 키가 반드시 있어야 한다.
+- manifest는 `__MSG_키__`, 팝업 HTML은 `data-i18n="키"`(텍스트) / `data-i18n-title`·`data-i18n-aria-label`(속성), 팝업 JS의 동적 문구는 [src/popup.ts](src/popup.ts)의 `t('키', '영어 기본값')`. HTML은 크롬이 자동 번역하지 않는다.
+- `data-i18n`은 textContent를 통째로 바꾼다. 아이콘(svg)이 같이 있는 요소에는 텍스트만 `<span>`으로 감싸서 붙인다.
+- 키 이름은 `popupXxx`처럼 위치 접두사를 쓴다. 각 키에 `description`(번역자용 맥락)을 단다.
+- 문구에 "Google Translate"를 쓰지 않는다. 이 확장은 크롬 번역 기능 위에서 동작한다 → "Chrome translation" / "크롬 번역".
+- 길이 한도: `extName` 75자, `extDescription` 132자(코드 포인트). 테스트가 검사한다.
+- 언어 선택 기준은 페이지 언어가 아니라 **크롬 UI 언어**다. 수동 확인은 크롬을 `--lang=ko` / `--lang=en`으로 띄워서 한다.
 
 ## Known Caveats (수정 시 주의 영역)
 
@@ -80,7 +93,7 @@ popup ⇄ content 동기화는 chrome.storage.local.isEnabled 하나만 사용
 ## 빌드/배포
 
 - [dist/](dist/)는 [.gitignore](.gitignore)됨. 배포는 `npm run build` 후 `dist/`를 zip으로 압축해 크롬 웹스토어에 업로드.
-- 테스트는 **Vitest + jsdom** ([vitest.config.mts](vitest.config.mts)). 테스트 파일은 소스 옆에 `src/**/*.test.ts`로 둔다. `core/`와 `utils/`는 테스트가 있고, `popup.ts`와 `content.ts`(부트스트랩)는 아직 없다.
+- 테스트는 **Vitest + jsdom** ([vitest.config.mts](vitest.config.mts)). 테스트 파일은 소스 옆에 `src/**/*.test.ts`로 둔다. `core/`와 `utils/`, `i18n.ts`는 테스트가 있고, `popup.ts`와 `content.ts`(부트스트랩)는 아직 없다. 팝업 문구의 키 누락은 [src/locales.test.ts](src/locales.test.ts)가 잡는다.
 - [src/core/observer.test.ts](src/core/observer.test.ts)는 모듈 레벨 상태 때문에 테스트마다 `vi.resetModules()` 후 다시 import하고, 이전 observer를 끊을 수 없어서 `body`를 통째로 교체한다. 번역은 shadow(notranslate)를 남긴 채 나머지 자식을 `<font>`로 바꾸는 방식으로 흉내 낸다. 디바운스·유예 시간은 fake timer(`advanceTimersByTimeAsync`)로 진행한다.
 - 설정 파일이 `.mts`인 이유 — [webpack.config.js](webpack.config.js)가 CommonJS라 [package.json](package.json)에 `"type": "module"`을 넣을 수 없다. `.ts`로 두면 Vite가 CommonJS로 로드해 경고가 난다.
 - `npm run typecheck`는 `src/**/*.ts`를 보므로 테스트 파일도 타입 검사 대상이다. 반면 `npm run build`는 entry에서 도달 가능한 모듈만 처리하므로 테스트는 번들에 들어가지 않는다.
