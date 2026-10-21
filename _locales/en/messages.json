@@ -10,5 +10,77 @@
     "actionTitle": {
         "message": "Shadow Translator",
         "description": "Toolbar icon tooltip."
+    },
+    "popupSubtitle": {
+        "message": "Original under translation",
+        "description": "Popup header subtitle."
+    },
+    "popupEnableLabel": {
+        "message": "Enable Shadow",
+        "description": "Label of the on/off toggle."
+    },
+    "popupStatusActive": {
+        "message": "Active on this page",
+        "description": "Toggle status when on."
+    },
+    "popupStatusPaused": {
+        "message": "Paused — toggle to resume",
+        "description": "Toggle status when off."
+    },
+    "popupHintRerun": {
+        "message": "Re-run Chrome translation to apply changes.",
+        "description": "Shown after toggling. Do not name Google Translate: the extension works with Chrome translation."
+    },
+    "popupStyleTitle": {
+        "message": "Shadow style",
+        "description": "Settings button and drawer title."
+    },
+    "popupStyleSettings": {
+        "message": "Shadow style settings",
+        "description": "Accessible label of the settings drawer."
+    },
+    "popupClose": {
+        "message": "Close",
+        "description": "Closes the drawer without saving."
+    },
+    "popupColor": {
+        "message": "Color",
+        "description": "Style field."
+    },
+    "popupPickColor": {
+        "message": "Pick color",
+        "description": "Tooltip of the custom color swatch."
+    },
+    "popupFontSize": {
+        "message": "Font size",
+        "description": "Style field."
+    },
+    "popupLineHeight": {
+        "message": "Line height",
+        "description": "Style field."
+    },
+    "popupOpacity": {
+        "message": "Opacity",
+        "description": "Style field."
+    },
+    "popupReset": {
+        "message": "Reset",
+        "description": "Resets style to defaults."
+    },
+    "popupCancel": {
+        "message": "Cancel",
+        "description": "Discards style changes."
+    },
+    "popupSave": {
+        "message": "Save",
+        "description": "Keeps style changes."
+    },
+    "popupHelp": {
+        "message": "Help",
+        "description": "Footer link to troubleshooting."
+    },
+    "popupReport": {
+        "message": "Report a problem",
+        "description": "Footer link to a new GitHub issue."
     }
 }

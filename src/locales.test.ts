@@ -17,6 +17,15 @@ const messages = Object.fromEntries(
 const keysOf = (locale: string) => Object.keys(messages[locale]).sort();
 const manifestKeys = [...manifestText.matchAll(/__MSG_(\w+)__/g)].map((m) => m[1]);
 
+// 팝업에서 쓰는 키: popup.html의 data-i18n(-속성)="key"와 popup.ts의 t('key', ...).
+// 팝업에는 테스트가 없으므로 문구 누락은 여기서 잡는다.
+const popupHtml = readFileSync(new URL('popup.html', root), 'utf8');
+const popupTs = readFileSync(new URL('src/popup.ts', root), 'utf8');
+const popupKeys = [
+    ...[...popupHtml.matchAll(/data-i18n(?:-[\w-]+)?="(\w+)"/g)].map((m) => m[1]),
+    ...[...popupTs.matchAll(/\bt\('(\w+)'/g)].map((m) => m[1]),
+];
+
 // 크롬 웹 스토어 한도. 글자 수는 코드 포인트 기준.
 const LIMITS: Record<string, number> = { extName: 75, extDescription: 132 };
 const length = (s: string) => [...s].length;
@@ -40,6 +49,13 @@ describe('_locales', () => {
     it.each(locales)('%s: manifest의 __MSG__ 키가 전부 있다', (locale) => {
         expect(manifestKeys.length).toBeGreaterThan(0);
         for (const key of manifestKeys) {
+            expect(messages[locale], `${locale}에 ${key} 없음`).toHaveProperty(key);
+        }
+    });
+
+    it.each(locales)('%s: 팝업에서 쓰는 키가 전부 있다', (locale) => {
+        expect(popupKeys.length).toBeGreaterThan(0);
+        for (const key of popupKeys) {
             expect(messages[locale], `${locale}에 ${key} 없음`).toHaveProperty(key);
         }
     });

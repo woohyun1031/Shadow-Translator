@@ -10,5 +10,77 @@
     "actionTitle": {
         "message": "Shadow Translator",
         "description": "Toolbar icon tooltip."
+    },
+    "popupSubtitle": {
+        "message": "번역문 아래 원문",
+        "description": "Popup header subtitle."
+    },
+    "popupEnableLabel": {
+        "message": "원문 표시",
+        "description": "Label of the on/off toggle."
+    },
+    "popupStatusActive": {
+        "message": "이 페이지에서 동작 중",
+        "description": "Toggle status when on."
+    },
+    "popupStatusPaused": {
+        "message": "일시 중지됨 — 켜면 다시 동작",
+        "description": "Toggle status when off."
+    },
+    "popupHintRerun": {
+        "message": "크롬 번역을 다시 실행하면 적용됩니다.",
+        "description": "Shown after toggling. Do not name Google Translate: the extension works with Chrome translation."
+    },
+    "popupStyleTitle": {
+        "message": "원문 스타일",
+        "description": "Settings button and drawer title."
+    },
+    "popupStyleSettings": {
+        "message": "원문 스타일 설정",
+        "description": "Accessible label of the settings drawer."
+    },
+    "popupClose": {
+        "message": "닫기",
+        "description": "Closes the drawer without saving."
+    },
+    "popupColor": {
+        "message": "색상",
+        "description": "Style field."
+    },
+    "popupPickColor": {
+        "message": "색상 선택",
+        "description": "Tooltip of the custom color swatch."
+    },
+    "popupFontSize": {
+        "message": "글자 크기",
+        "description": "Style field."
+    },
+    "popupLineHeight": {
+        "message": "줄 간격",
+        "description": "Style field."
+    },
+    "popupOpacity": {
+        "message": "불투명도",
+        "description": "Style field."
+    },
+    "popupReset": {
+        "message": "초기화",
+        "description": "Resets style to defaults."
+    },
+    "popupCancel": {
+        "message": "취소",
+        "description": "Discards style changes."
+    },
+    "popupSave": {
+        "message": "저장",
+        "description": "Keeps style changes."
+    },
+    "popupHelp": {
+        "message": "도움말",
+        "description": "Footer link to troubleshooting."
+    },
+    "popupReport": {
+        "message": "문제 신고",
+        "description": "Footer link to a new GitHub issue."
     }
 }
