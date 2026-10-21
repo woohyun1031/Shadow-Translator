@@ -4,7 +4,8 @@ import { setShadowStyle } from './core/renderer';
 import type { ShadowStyle } from './core/defaults';
 
 (function () {
-    console.log('Shadow-Translator: Modular entry point initialized.');
+    // 모든 사이트·프레임에서 실행되므로 배포 빌드에서는 콘솔에 아무것도 남기지 않는다.
+    if (__DEV__) console.log('Shadow-Translator: Modular entry point initialized.');
 
     const bootstrap = () => {
         if (!document.body) {
